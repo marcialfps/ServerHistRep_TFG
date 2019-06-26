@@ -14,16 +14,16 @@ public class Representation {
 	
 	private String title;
 	
-	@Column(length=8192)
+	@Column(columnDefinition = "TEXT")
 	private String description;
 	
-	@Column(length=8192)
+	@Column(columnDefinition = "TEXT")
 	private String history;
 	
-	@Column(length=8192)
+	@Column(columnDefinition = "TEXT")
 	private String interestInfo;
 	
-	@Column(length=8192)
+	@Column(columnDefinition = "TEXT")
 	private String technicalInfo;
 	
 	private double longitude, latitude;
