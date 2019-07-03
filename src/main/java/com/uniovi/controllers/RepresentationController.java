@@ -103,9 +103,9 @@ public class RepresentationController {
 				log.info("Content type: "+file.getContentType());
 				InputStream is = file.getInputStream();
 				if(file.getContentType().contains("image")) {
-					Files.copy(is, Paths.get("src/main/resources/static/images/img-"+id+".png"), StandardCopyOption.REPLACE_EXISTING);
+					Files.copy(is, Paths.get("/images/img-"+id+".png"), StandardCopyOption.REPLACE_EXISTING);
 				} else if(file.getContentType().contains("video")) {
-					Files.copy(is, Paths.get("src/main/resources/static/videos/rep-"+id+".mp4"), StandardCopyOption.REPLACE_EXISTING);
+					Files.copy(is, Paths.get("/videos/rep-"+id+".mp4"), StandardCopyOption.REPLACE_EXISTING);
 				}
 			} catch (IOException e) {
 				e.printStackTrace();
