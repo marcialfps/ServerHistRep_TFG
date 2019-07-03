@@ -148,7 +148,7 @@ public class RepresentationController {
 	@RequestMapping(value="/representation/image/{id}", method=RequestMethod.GET)
 	public String getRepresentationImage(@PathVariable Long id){
 		log.info("Getting image of representation: "+id);
-		return "/images/img-"+id+".png";
+		return "/images/img-"+id+".jpg";
 	}
 	
 	@RequestMapping(value = "/location/image/{id}", produces = MediaType.IMAGE_PNG_VALUE)
