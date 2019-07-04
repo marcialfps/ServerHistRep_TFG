@@ -105,7 +105,7 @@ public class RepresentationController {
 				if(file.getContentType().contains("image")) {
 					Files.copy(is, Paths.get("src/main/resources/static/images/img-"+id+".jpg"), StandardCopyOption.REPLACE_EXISTING);
 				} else if(file.getContentType().contains("video")) {
-					Files.copy(is, Paths.get("src/main/resources/static/videos/rep-"+id+".mp4"), StandardCopyOption.REPLACE_EXISTING);
+					Files.copy(is, Paths.get("src/main/resources/static/videos/rep-"+id+".wmv"), StandardCopyOption.REPLACE_EXISTING);
 				}
 			} catch (IOException e) {
 				e.printStackTrace();
@@ -142,7 +142,7 @@ public class RepresentationController {
 	@RequestMapping(value="/representation/video/{id}", method=RequestMethod.GET)
 	public String getRepresentationVideo(@PathVariable Long id){
 		log.info("Getting video of representation: "+id);
-		return "/videos/rep-"+id+".mp4";
+		return "/videos/rep-"+id+".wmv";
 	}
 	
 	@RequestMapping(value="/representation/image/{id}", method=RequestMethod.GET)
