@@ -25,8 +25,8 @@ public class RepresentationService {
 		//return representationRepository.findOne(id);
 	}
 	
-	public void addRepresentation(Representation publication) {
-		representationRepository.save(publication);
+	public void addRepresentation(Representation representation) {
+		representationRepository.save(representation);
 	}
 	
 	public void deleteRepresentation(Long id) {

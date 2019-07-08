@@ -135,8 +135,12 @@ public class RepresentationController {
 	public List<Representation> getRepresentation(@PathVariable Long id){
 		log.info("Getting information of representation: "+id);
 		List<Representation> rep = new ArrayList<Representation>();
-		rep.add(representationService.getRepresentation(id));
-		return rep;
+		if (representationService.getRepresentation(id) != null) {
+			rep.add(representationService.getRepresentation(id));
+			return rep;
+		} else {
+			return null;
+		}
 	}
 	
 	@RequestMapping(value="/representation/video/{id}", method=RequestMethod.GET)
@@ -149,11 +153,5 @@ public class RepresentationController {
 	public String getRepresentationImage(@PathVariable Long id){
 		log.info("Getting image of representation: "+id);
 		return "/images/img-"+id+".jpg";
-	}
-	
-	@RequestMapping(value = "/location/image/{id}", produces = MediaType.IMAGE_PNG_VALUE)
-	public @ResponseBody byte[] getLocationImage(@PathVariable Long id) throws IOException {
-	    InputStream in = getClass().getResourceAsStream("/src/main/resources/images/img-"+id);
-	    return IOUtils.toByteArray(in);
 	}
 }

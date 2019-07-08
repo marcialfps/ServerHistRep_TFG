@@ -9,5 +9,5 @@ import org.springframework.data.repository.query.Param;
 import com.uniovi.entities.Admin;
 
 public interface AdminRepository extends CrudRepository<Admin, Long> {
-	List<Admin> findByEmail(String email);
+	public List<Admin> findByEmail(String email);
 }
