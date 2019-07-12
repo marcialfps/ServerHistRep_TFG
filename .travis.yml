@@ -1,9 +1,3 @@
 language: java
 before_install:
   - chmod +x mvnw
-  
-addons:
-  sonarcloud:
-    organization: marcialfps-github
-    token:
-      secure: a317acc0c78d2284c1f687e6653be771ae468102
