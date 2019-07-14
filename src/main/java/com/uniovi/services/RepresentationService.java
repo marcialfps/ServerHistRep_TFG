@@ -22,7 +22,6 @@ public class RepresentationService {
 
 	public Representation getRepresentation(Long id) {
 		return representationRepository.findById(id).get();
-		//return representationRepository.findOne(id);
 	}
 	
 	public void addRepresentation(Representation representation) {
@@ -33,6 +32,11 @@ public class RepresentationService {
 		representationRepository.deleteById(id);
 	}
 	
+	/**
+	 * It obtains all the representations and creates a list of locations
+	 * obtaining the latitude and longitude of each representation.
+	 * @return
+	 */
 	public List<Location> getLocations() {
 		List<Location> locations = new ArrayList<Location>();
 		for(Representation rep : representationRepository.findAll()) {

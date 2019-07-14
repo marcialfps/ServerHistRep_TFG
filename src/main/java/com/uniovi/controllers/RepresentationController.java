@@ -34,6 +34,12 @@ public class RepresentationController {
 	
 	private final Logger log = LoggerFactory.getLogger(this.getClass());
 	
+	/**
+	 * Receives representation id, if it is related with a representation,
+	 * it tries to remove it.
+	 * @param id
+	 * @return message
+	 */
 	@RequestMapping(value="/representation/delete/{id}", method=RequestMethod.GET)
 	public String deleteRepresentation(@PathVariable Long id){
 		Representation representation = representationService.getRepresentation(id);
@@ -48,6 +54,18 @@ public class RepresentationController {
 		return "OK";
 	}
 	
+	/**
+	 * Creates a new representation from all the received data and saves
+	 * it.
+	 * @param title
+	 * @param description
+	 * @param history
+	 * @param interestInfo
+	 * @param technicalInfo
+	 * @param latitude
+	 * @param longitude
+	 * @return created representation.
+	 */
 	@RequestMapping(value="/representation/add", method=RequestMethod.POST)
 	public List<Representation> setRepresentation(@RequestParam("title") String title,
 								@RequestParam("description") String description,
@@ -68,6 +86,19 @@ public class RepresentationController {
 		return aux;
 	}
 
+	/**
+	 * Receives all the fields and changes it. Finally, it saves
+	 * the representation.
+	 * @param id
+	 * @param title
+	 * @param description
+	 * @param history
+	 * @param interestInfo
+	 * @param technicalInfo
+	 * @param latitude
+	 * @param longitude
+	 * @return representation information.
+	 */
 	@RequestMapping(value="/representation/update/{id}", method=RequestMethod.POST)
 	public List<Representation> updateRepresentation(@PathVariable Long id,
 								@RequestParam("title") String title,
@@ -95,6 +126,13 @@ public class RepresentationController {
 		return aux;
 	}
 	
+	/**
+	 * It receives a file, if it is an image, is copied to the images folder.
+	 * Otherwise, it is copied to the videos folder.
+	 * @param id
+	 * @param file
+	 * @return
+	 */
 	@RequestMapping(value="/representation/loadMultimedia/{id}", method=RequestMethod.POST)
 	public String uploadRepresentation(@PathVariable Long id,
 								@RequestParam("file") MultipartFile file){
@@ -119,18 +157,29 @@ public class RepresentationController {
 		return "OK";
 	}
 	
+	/**
+	 * @return the information of all the representations.
+	 */
 	@RequestMapping(value="/representations", method=RequestMethod.GET)
 	public Iterable<Representation> getRepresentations(){
 		log.info("Getting information of all represenations.");
 		return representationService.getRepresentations();
 	}
 	
+	/**
+	 * @return the list of locations.
+	 */
 	@RequestMapping(value="/location/list", method=RequestMethod.GET)
 	public List<Location> getLocations(){
 		log.info("Getting list of locations: "+representationService.getLocations().toString());
 		return representationService.getLocations();
 	}
 	
+	/**
+	 * Return the information of a given representation.
+	 * @param representation id
+	 * @return representation information.
+	 */
 	@RequestMapping(value="/representation/{id}", method=RequestMethod.GET)
 	public List<Representation> getRepresentation(@PathVariable Long id){
 		log.info("Getting information of representation: "+id);
@@ -143,12 +192,20 @@ public class RepresentationController {
 		}
 	}
 	
+	/**
+	 * @param id
+	 * @return the path to the video folder.
+	 */
 	@RequestMapping(value="/representation/video/{id}", method=RequestMethod.GET)
 	public String getRepresentationVideo(@PathVariable Long id){
 		log.info("Getting video of representation: "+id);
 		return "/videos/rep-"+id+".mp4";
 	}
 	
+	/**
+	 * @param id
+	 * @return the path to the image folder.
+	 */
 	@RequestMapping(value="/representation/image/{id}", method=RequestMethod.GET)
 	public String getRepresentationImage(@PathVariable Long id){
 		log.info("Getting image of representation: "+id);

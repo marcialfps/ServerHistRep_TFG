@@ -22,6 +22,10 @@ public class AdminService {
 		return adminRepository.findById(id).get();
 	}
 	
+	/**
+	 * It needs to encrypt the password that is received.
+	 * @param admin
+	 */
 	public void addAdmin(Admin admin) {
 		admin.setPassword(passwordEncoder.encode(admin.getPassword()));
 		adminRepository.save(admin);
@@ -32,9 +36,14 @@ public class AdminService {
 	}
 	
 	public void deleteAdmin(Long id) {
-		//adminRepository.delete(id);
+		adminRepository.deleteById(id);
 	}
 	
+	/**
+	 * If admin password and the new password are equals, we can update it.
+	 * @param admin
+	 * @param password
+	 */
 	public void updateAdmin(Admin admin, String password) {
 		if (admin.getPassword().equals(passwordEncoder.encode(password))) {
 			admin.setPassword(password);

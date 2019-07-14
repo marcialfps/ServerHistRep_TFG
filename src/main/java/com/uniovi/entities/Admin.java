@@ -12,13 +12,12 @@ public class Admin {
 	@Id
 	@GeneratedValue
 	private long id;
-	@Column(unique=true)
+	@Column(unique=true) //We don't allow two users with same email
 	private String email;
 	private String name;
 	private String lastName;
-	
 	private String password;
-	@Transient //propiedad que no se almacena e la tabla.
+	@Transient
 	private String passwordConfirm;
 
 	public Admin(String email, String name, String lastName) {

@@ -29,6 +29,17 @@ public class AdminController {
 	
 	private final Logger log = LoggerFactory.getLogger(this.getClass());
 	
+	/**
+	 * First it verifies that the passwords are equal. Then, save
+	 * the admin and return the admin in a list in order to be
+	 * readed by the AdminHistRep module.
+	 * @param name
+	 * @param lastName
+	 * @param email
+	 * @param password
+	 * @param passwordConfirm
+	 * @return admin information.
+	 */
 	@RequestMapping(value="/admin/add", method=RequestMethod.POST)
 	public List<Admin> setAdmin(@RequestParam("name") String name,
 								@RequestParam("lastname") String lastName,
@@ -53,6 +64,13 @@ public class AdminController {
 		return aux;
 	}
 	
+	/**
+	 * It receives the id of the admin. If there is not admin
+	 * with that id, it returns an error. Else, delete the admin
+	 * and returns a message.
+	 * @param id
+	 * @return status message.
+	 */
 	@RequestMapping(value="/admin/delete/{id}", method=RequestMethod.GET)
 	public String deleteAdmin(@PathVariable Long id){
 		Admin admin = adminService.getAdmin(id);
@@ -66,6 +84,17 @@ public class AdminController {
 		return "{\"status\": \"Done\"}";
 	}
 	
+	/**
+	 * If the id is not associated with an admin account, null is returned.
+	 * Else, it updates all the fields and save the admin. 
+	 * @param id
+	 * @param name
+	 * @param lastName
+	 * @param email
+	 * @param password
+	 * @param passwordConfirm
+	 * @return admin information.
+	 */
 	@RequestMapping(value="/admin/update/{id}", method=RequestMethod.POST)
 	public List<Admin> updateAdmin(@PathVariable Long id,
 							@RequestParam("name") String name,
@@ -93,25 +122,40 @@ public class AdminController {
 		return aux;
 	}	
 	
+	/**
+	 * @param email
+	 * @param password
+	 * @return true if the login is correct.
+	 */
 	@RequestMapping(value="/admin/login", method=RequestMethod.POST)
 	public boolean login(@RequestParam("email") String email,
 								@RequestParam("password") String password){
 		log.info("Trying to log user with email: "+email);
+		
 		if (passwordEncoder.matches(password, adminService.getAdminByEmail(email).get(0).getPassword())) {
 			log.info("Correct login.");
+			return true;
 		}
-		else 
+		else {
 			log.info("Invalid login.");
-		Admin admin = adminService.getAdminByEmail(email).get(0);
-		return passwordEncoder.matches(password, adminService.getAdminByEmail(email).get(0).getPassword());
+			return false;
+		}
 	}
 	
+	/**
+	 * @param user email
+	 * @return admin information.
+	 */
 	@RequestMapping(value="/admin/{email}", method=RequestMethod.GET)
 	public List<Admin> getAdmin(@PathVariable("email") String email) {
 		log.info("Obtaining admin: "+email);
 		return adminService.getAdminByEmail(email);
 	}
 	
+	/**
+	 * @param user id
+	 * @return admin information.
+	 */
 	@RequestMapping(value="/adminId/{id}", method=RequestMethod.GET)
 	public List<Admin> getAdminId(@PathVariable("id") Long id) {
 		log.info("Obtaining admin: "+id);

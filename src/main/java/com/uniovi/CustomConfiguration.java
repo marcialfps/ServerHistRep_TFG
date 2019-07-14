@@ -11,6 +11,10 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter
 @Configuration
 public class CustomConfiguration extends WebMvcConfigurerAdapter {
 
+	/**
+	 * Set the max size of the files.
+	 * @return CommonsMultipartResolver.
+	 */
 	@Bean(name = "multipartResolver")
 	public CommonsMultipartResolver multipartResolver() {
 	    CommonsMultipartResolver multipartResolver = new CommonsMultipartResolver();
@@ -18,11 +22,18 @@ public class CustomConfiguration extends WebMvcConfigurerAdapter {
 	    return multipartResolver;
 	}
 	
+	/**
+	 * Initialize encrypter.
+	 * @return BCryptPasswordEncoder.
+	 */
 	@Bean
 	public PasswordEncoder passwordEncoder() {
 	    return new BCryptPasswordEncoder();
 	}
 	
+	/**
+	 * Set the locations where the files are store.
+	 */
 	@Override
 	public void addResourceHandlers(ResourceHandlerRegistry registry) {
 		String projectPath = System.getProperty("user.dir");

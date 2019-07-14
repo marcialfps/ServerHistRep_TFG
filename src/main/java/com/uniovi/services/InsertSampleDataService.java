@@ -18,6 +18,10 @@ public class InsertSampleDataService {
 	@Autowired
 	private RepresentationService representationService;
 	
+	/**
+	 * Here, sample data is introduced. 
+	 * It is not used in production environment.
+	 */
 	@PostConstruct
 	public void init() {
 		

@@ -8,24 +8,19 @@ import javax.persistence.Lob;
 
 @Entity
 public class Representation {
+	
 	@Id
 	@GeneratedValue
 	private Long id;
-	
 	private String title;
-	
 	@Column(columnDefinition = "TEXT")
 	private String description;
-	
 	@Column(columnDefinition = "TEXT")
 	private String history;
-	
 	@Column(columnDefinition = "TEXT")
 	private String interestInfo;
-	
 	@Column(columnDefinition = "TEXT")
 	private String technicalInfo;
-	
 	private double longitude, latitude;
 	
 	public Representation() {}
